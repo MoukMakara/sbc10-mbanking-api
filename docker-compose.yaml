@@ -1,0 +1,18 @@
+version: "3.9"
+
+volumes:
+  vol-sbc10:
+
+services:
+  sbc10-postgres:
+    image: "postgres:16.3-bullseye"
+    container_name: "db_sbc10_mbanking"
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 8892
+      POSTGRES_USER: postgress
+      POSTGRES_DB: db_sbc10_mbanking
+    volumes:
+      - "vol-sbc10:/var/lib/postgresql/data"
