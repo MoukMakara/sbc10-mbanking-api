@@ -22,7 +22,7 @@ public interface AccountService {
     /**
      * softDeleteAccount and deleteAccount
      * */
-    void softDeleteAccount(String actNo, AccountSoftDeleteRequest accountSoftDeleteRequest);
+    void softDeleteAccount(String actNo);
 
     void deleteAccount(String actNo);
 

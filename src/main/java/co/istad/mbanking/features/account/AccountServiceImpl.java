@@ -90,15 +90,15 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void softDeleteAccount(String actNo, AccountSoftDeleteRequest accountSoftDeleteRequest) {
+    public void softDeleteAccount(String actNo) {
         // Validate account
         Account account = accountRepository
                 .findByActNo(actNo)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Account has not been found"));
 
-        account.setIsDeleted(accountSoftDeleteRequest.isDeleted());
-//      account.setIsDeleted(true);
+//        account.setIsDeleted(accountSoftDeleteRequest.isDeleted());
+      account.setIsDeleted(true);
         accountRepository.save(account);
     }
 

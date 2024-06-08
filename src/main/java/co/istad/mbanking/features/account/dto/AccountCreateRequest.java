@@ -19,6 +19,9 @@ public record AccountCreateRequest(
         String accountTypeAlias,
 
         @NotBlank(message = "Account owner is required")
-        String userUuid
+        String userUuid,
+
+        @NotBlank(message = "Account owner is required")
+        Boolean isDeleted
 ) {
 }

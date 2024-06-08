@@ -11,6 +11,7 @@ public record AccountResponse(
         String actName,
         String actNo,
         BigDecimal balance,
+        Boolean isDeleted,
         AccountTypeResponse accountType
 ) {
 }

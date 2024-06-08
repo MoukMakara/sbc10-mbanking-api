@@ -23,9 +23,8 @@ public class AccountController {
     // softDeleteAccount
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{actNo}/soft-delete")
-    void softDeleteAccount(@PathVariable("actNo") String actNo,
-                           @Valid @RequestBody AccountSoftDeleteRequest accountSoftDeleteRequest) {
-        accountService.softDeleteAccount(actNo, accountSoftDeleteRequest);
+    void softDeleteAccount(@PathVariable("actNo") String actNo) {
+        accountService.softDeleteAccount(actNo);
     }
     // deleteAccount
     @DeleteMapping("/{actNo}")
