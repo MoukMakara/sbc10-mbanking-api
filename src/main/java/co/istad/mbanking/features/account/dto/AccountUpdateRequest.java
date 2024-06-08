@@ -23,5 +23,6 @@ public record AccountUpdateRequest(
 
         @NotNull(message = "isHidden is required")
         Boolean isHidden
+
 ) {
 }
