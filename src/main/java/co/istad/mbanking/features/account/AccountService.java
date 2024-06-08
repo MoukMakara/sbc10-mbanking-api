@@ -1,9 +1,7 @@
 package co.istad.mbanking.features.account;
 
-import co.istad.mbanking.features.account.dto.AccountCreateRequest;
-import co.istad.mbanking.features.account.dto.AccountRenameRequest;
-import co.istad.mbanking.features.account.dto.AccountResponse;
-import co.istad.mbanking.features.account.dto.AccountTransferLimitRequest;
+import co.istad.mbanking.features.account.dto.*;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -15,6 +13,18 @@ public interface AccountService {
     void hideAccount(String actNo);
 
     AccountResponse renameAccount(String actNo, AccountRenameRequest accountRenameRequest);
+
+    /**
+     * @param accountUpdateRequest
+     * */
+    void updateAccount(String actNo, AccountUpdateRequest accountUpdateRequest);
+
+    /**
+     * softDeleteAccount and deleteAccount
+     * */
+    void softDeleteAccount(String actNo, AccountSoftDeleteRequest accountSoftDeleteRequest);
+
+    void deleteAccount(String actNo);
 
 
     /**

@@ -3,13 +3,11 @@ package co.istad.mbanking.features.account;
 import co.istad.mbanking.domain.Account;
 import co.istad.mbanking.domain.AccountType;
 import co.istad.mbanking.domain.User;
-import co.istad.mbanking.features.account.dto.AccountCreateRequest;
-import co.istad.mbanking.features.account.dto.AccountRenameRequest;
-import co.istad.mbanking.features.account.dto.AccountResponse;
-import co.istad.mbanking.features.account.dto.AccountTransferLimitRequest;
+import co.istad.mbanking.features.account.dto.*;
 import co.istad.mbanking.features.accounttype.AccountTypeRepository;
 import co.istad.mbanking.features.user.UserRepository;
 import co.istad.mbanking.mapper.AccountMapper;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -71,6 +68,50 @@ public class AccountServiceImpl implements AccountService {
         account = accountRepository.save(account);
 
         return accountMapper.toAccountResponse(account);
+    }
+
+    // updateAccount
+    @Override
+    public void updateAccount(String actNo, AccountUpdateRequest accountUpdateRequest) {
+        // Validate account
+        Account account = accountRepository
+                .findByActNo(actNo)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Account has not been found"));
+
+        // Update account information
+        account.setAlias(accountUpdateRequest.alias());
+        account.setActName(accountUpdateRequest.actName());
+        account.setBalance(accountUpdateRequest.balance());
+        account.setTransferLimit(accountUpdateRequest.transferLimit());
+        account.setIsHidden(accountUpdateRequest.isHidden());
+
+        accountRepository.save(account);
+    }
+
+    @Override
+    public void softDeleteAccount(String actNo, AccountSoftDeleteRequest accountSoftDeleteRequest) {
+        // Validate account
+        Account account = accountRepository
+                .findByActNo(actNo)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Account has not been found"));
+
+        account.setIsDeleted(accountSoftDeleteRequest.isDeleted());
+//      account.setIsDeleted(true);
+        accountRepository.save(account);
+    }
+
+    @Override
+    public void deleteAccount(String actNo) {
+        // Validate account
+        Account account = accountRepository
+                .findByActNo(actNo)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Account has not been found"));
+
+        accountRepository.delete(account);
+//        accountRepository.save(account);
     }
 
     @Override

@@ -1,9 +1,6 @@
 package co.istad.mbanking.features.account;
 
-import co.istad.mbanking.features.account.dto.AccountCreateRequest;
-import co.istad.mbanking.features.account.dto.AccountRenameRequest;
-import co.istad.mbanking.features.account.dto.AccountResponse;
-import co.istad.mbanking.features.account.dto.AccountTransferLimitRequest;
+import co.istad.mbanking.features.account.dto.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,6 +13,25 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
 
     private final AccountService accountService;
+
+    // updateAccount
+    @PutMapping("/{actNo}/update")
+    void updateAccount(@PathVariable("actNo") String actNo,
+                       @Valid @RequestBody AccountUpdateRequest accountUpdateRequest) {
+        accountService.updateAccount(actNo, accountUpdateRequest);
+    }
+    // softDeleteAccount
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{actNo}/soft-delete")
+    void softDeleteAccount(@PathVariable("actNo") String actNo,
+                           @Valid @RequestBody AccountSoftDeleteRequest accountSoftDeleteRequest) {
+        accountService.softDeleteAccount(actNo, accountSoftDeleteRequest);
+    }
+    // deleteAccount
+    @DeleteMapping("/{actNo}")
+    void deleteAccount(@PathVariable("actNo") String actNo) {
+        accountService.deleteAccount(actNo);
+    }
 
 
     @ResponseStatus(HttpStatus.NO_CONTENT)

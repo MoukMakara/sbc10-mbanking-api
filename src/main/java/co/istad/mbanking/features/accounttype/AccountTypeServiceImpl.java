@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
+@Slf4j // call log in line 58
 public class AccountTypeServiceImpl implements AccountTypeService {
 
     private final AccountTypeRepository accountTypeRepository;
