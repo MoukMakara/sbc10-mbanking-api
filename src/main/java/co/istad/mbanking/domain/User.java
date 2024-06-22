@@ -25,6 +25,9 @@ public class User {
     @Column(length = 10, nullable = false, unique = true)
     private String phoneNumber;
 
+    @Column(length = 40, nullable = false, unique = true)
+    private String email;
+
     @Column(length = 4, nullable = false)
     private String pin;
 
@@ -59,8 +62,15 @@ public class User {
 
     private Boolean isDeleted;
     private Boolean isBlocked;
+    private Boolean isVerified;
 
     @OneToMany(mappedBy = "user")
     private List<Account> accounts;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
 
 }
