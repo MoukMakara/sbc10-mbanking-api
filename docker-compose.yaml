@@ -1,18 +1,19 @@
+#docker-compose.yaml
 version: "3.9"
 
 volumes:
-  vol-sbc10:
+  vol-mbanking:
 
 services:
-  sbc10-postgres:
-    image: "postgres:16.3-bullseye"
-    container_name: "db_sbc10_mbanking"
+  sbc11-postgres:
+    image: "postgres:16.4-bullseye"
+    container_name: "mbanking-postgres"
     ports:
-      - "5432:5432"
+      - "6666:5432"
     restart: always
     environment:
-      POSTGRES_PASSWORD: 8892
-      POSTGRES_USER: postgress
-      POSTGRES_DB: db_sbc10_mbanking
+      POSTGRES_PASSWORD: Admin
+      POSTGRES_USER: postgres
+      POSTGRES_DB: db_mbanking
     volumes:
-      - "vol-sbc10:/var/lib/postgresql/data"
+      - "vol-mbanking:/var/lib/postgresql/data"

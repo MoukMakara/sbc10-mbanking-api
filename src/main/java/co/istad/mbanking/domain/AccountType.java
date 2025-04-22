@@ -23,7 +23,7 @@ public class AccountType {
     @Column(unique = true, nullable = false, length = 50)
     private String name; // Payroll, Saving Year
 
-    @Column(columnDefinition = "TEXT DEFAULT 'hello'")
+//    @Column(columnDefinition = "TEXT DEFAULT 'hello'")
     private String description;
 
     @Column(nullable = false)

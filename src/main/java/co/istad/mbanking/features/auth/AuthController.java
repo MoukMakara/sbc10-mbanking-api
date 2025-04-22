@@ -1,6 +1,7 @@
 package co.istad.mbanking.features.auth;
 
 import co.istad.mbanking.features.auth.dto.*;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -10,9 +11,15 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class AuthController {
 
     private final AuthService authService;
+
+    @PostMapping("/refresh-token")
+    AuthResponse refreshToken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+        return authService.refreshToken(refreshTokenRequest);
+    }
 
     @PostMapping("/login")
     AuthResponse login(@Valid @RequestBody LoginRequest loginRequest) {

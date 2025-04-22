@@ -3,6 +3,7 @@ package co.istad.mbanking.features.accounttype;
 import co.istad.mbanking.features.accounttype.dto.AccountTypeRequest;
 import co.istad.mbanking.features.accounttype.dto.AccountTypeResponse;
 import co.istad.mbanking.features.accounttype.dto.AccountTypeUpdateRequest;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/account-types")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class AccountTypeController {
 
     private final AccountTypeService accountTypeService;

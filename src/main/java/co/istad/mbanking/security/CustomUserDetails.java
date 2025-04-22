@@ -10,23 +10,24 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
-public class CustomerUserDetails implements UserDetails {
+public class CustomUserDetails implements UserDetails {
+
     private User user;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return user.getRoles();
     }
-
     @Override
     public String getPassword() {
         return user.getPassword();
     }
-
     @Override
     public String getUsername() {
         return user.getPhoneNumber();
     }
+
 }

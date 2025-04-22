@@ -13,16 +13,19 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class UserDetailsServiceImpl implements UserDetailsService {
+
     private final UserRepository userRepository;
+
     @Override
     public UserDetails loadUserByUsername(String phoneNumber) throws UsernameNotFoundException {
         User user = userRepository
                 .findByPhoneNumberAndIsDeletedFalse(phoneNumber)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("User has not been found"));
 
         log.info("User: {}", user.getPhoneNumber());
-        CustomerUserDetails customerUserDetails = new CustomerUserDetails();
-        customerUserDetails.setUser(user);
-        return customerUserDetails;
+        CustomUserDetails customUserDetails = new CustomUserDetails();
+        customUserDetails.setUser(user);
+        return customUserDetails;
     }
+
 }

@@ -5,6 +5,8 @@ import jakarta.mail.MessagingException;
 
 public interface AuthService {
 
+    AuthResponse refreshToken(RefreshTokenRequest refreshTokenRequest);
+
     AuthResponse login(LoginRequest loginRequest);
 
     void verify(VerificationRequest verificationRequest);
