@@ -82,7 +82,7 @@ public class AuthServiceImpl implements AuthService {
                 .subject("Access APIs")
                 .issuer(jwt.getId())
                 .issuedAt(now)
-                .expiresAt(now.plus(10, ChronoUnit.SECONDS))
+                .expiresAt(now.plus(30, ChronoUnit.MINUTES))
                 .audience(jwt.getAudience())
                 .claim("isAdmin", true)
                 .claim("studentId", "ISTAD0010")
@@ -149,7 +149,7 @@ public class AuthServiceImpl implements AuthService {
                 .subject("Access APIs")
                 .issuer(auth.getName())
                 .issuedAt(now)
-                .expiresAt(now.plus(10, ChronoUnit.SECONDS)) // token expiration 10 seconds
+                .expiresAt(now.plus(30, ChronoUnit.MINUTES)) // token expiration 10 seconds
                 .audience(List.of("NextJS", "Android", "iOS"))
                 .claim("isAdmin", true)
                 .claim("studentId", "ISTAD0010")
@@ -161,7 +161,7 @@ public class AuthServiceImpl implements AuthService {
                 .subject("Refresh Token")
                 .issuer(auth.getName())
                 .issuedAt(now)
-                .expiresAt(now.plus(1, ChronoUnit.DAYS))
+                .expiresAt(now.plus(30, ChronoUnit.DAYS))
                 .audience(List.of("NextJS", "Android", "iOS"))
                 .claim("scope", scope)
                 .build();
