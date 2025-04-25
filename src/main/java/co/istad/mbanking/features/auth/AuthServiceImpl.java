@@ -105,7 +105,7 @@ public class AuthServiceImpl implements AuthService {
                     .subject("Refresh Token")
                     .issuer(auth.getName())
                     .issuedAt(now)
-                    .expiresAt(now.plus(7, ChronoUnit.DAYS))
+                    .expiresAt(now.plus(30, ChronoUnit.DAYS))
                     .audience(List.of("NextJS", "Android", "iOS"))
                     .claim("scope", jwt.getClaimAsString("scope"))
                     .build();
